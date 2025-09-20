@@ -17,7 +17,7 @@ public:
 	DISALLOW_COPY_AND_ASSIGN(Actor);
 	
 	virtual void OnCreate() = 0;
-	virtual void OnShutdown() = 0;
+	virtual void OnDestroy() = 0;
 
 	virtual void OnUpdate(float deltaSeconds);
 	virtual void OnRender() const;
