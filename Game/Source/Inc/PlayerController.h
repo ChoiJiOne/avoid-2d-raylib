@@ -24,5 +24,5 @@ public:
 	virtual void Update(IModel& model, float deltaSeconds) override;
 
 private:
-	std::map<EDirection, glm::vec2> _directionVectorMap;
+	std::map<EDirection, glm::vec2> _directionMap;
 };
