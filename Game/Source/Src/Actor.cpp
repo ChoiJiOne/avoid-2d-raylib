@@ -1,7 +1,4 @@
 #include "Actor.h"
-#include "IController.h"
-#include "IModel.h"
-#include "IView.h"
 #include "GameAssert.h"
 
 Actor::~Actor()

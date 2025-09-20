@@ -3,10 +3,9 @@
 #include <memory>
 
 #include "GameMacro.h"
-
-class IModel;
-class IView;
-class IController;
+#include "IController.h"
+#include "IModel.h"
+#include "IView.h"
 
 class Actor
 {
