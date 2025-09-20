@@ -22,6 +22,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 find_package(raylib CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
 
 # 여기서부터 프로젝트 세팅 시작...
 set(GAME_PROJECT_NAME "Game")
@@ -51,7 +52,7 @@ add_executable(
   ${GAME_SOURCE_FILE}
 )
 target_include_directories(${GAME_PROJECT_NAME} PUBLIC ${GAME_PROJECT_HEADER_FILE_PATH} ${GAME_PROJECT_SOURCE_FILE_PATH} ${RAYGUI_INCLUDE_DIRS})
-target_link_libraries(${GAME_PROJECT_NAME} PUBLIC raylib)
+target_link_libraries(${GAME_PROJECT_NAME} PUBLIC raylib glm::glm)
 
 target_compile_definitions(
     ${GAME_PROJECT_NAME}

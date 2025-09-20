@@ -1,6 +1,7 @@
 {
   "dependencies": [
     "raylib",
-    "raygui"
+    "raygui",
+    "glm"
   ]
 }
