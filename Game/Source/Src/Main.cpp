@@ -9,6 +9,8 @@ int main(void)
     
     while (!WindowShouldClose())
     {
+        float deltaSeconds = GetFrameTime();
+
         BeginDrawing();
         ClearBackground(RAYWHITE);
         EndDrawing();
