@@ -5,7 +5,6 @@
 #include <glm/glm.hpp>
 
 #include "IController.h"
-#include "PlayerModel.h"
 
 class PlayerController : public IController
 {

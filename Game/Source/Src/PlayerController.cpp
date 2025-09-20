@@ -1,5 +1,5 @@
+#include "CharacterModel.h"
 #include "PlayerController.h"
-#include "PlayerModel.h"
 
 PlayerController::PlayerController()
 {
@@ -14,9 +14,9 @@ PlayerController::PlayerController()
 
 void PlayerController::Update(IModel& model, float deltaSeconds)
 {
-	PlayerModel& playerModel = static_cast<PlayerModel&>(model);
+	CharacterModel& character = static_cast<CharacterModel&>(model);
 
-    glm::vec2 center = playerModel.GetCenter();
+    glm::vec2 center = character.GetCenter();
     glm::vec2 moveDirecton = glm::vec2{ 0.0f, 0.0f };
     for (const auto& direction : _directionMap)
     {
@@ -26,6 +26,6 @@ void PlayerController::Update(IModel& model, float deltaSeconds)
         }
     }
 
-    center += deltaSeconds * playerModel.GetSpeed() * moveDirecton;
-    playerModel.SetCenter(center);
+    center += deltaSeconds * character.GetSpeed() * moveDirecton;
+    character.SetCenter(center);
 }

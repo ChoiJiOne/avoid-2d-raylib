@@ -1,23 +1,24 @@
 #pragma once
 
 #include <raylib.h>
+#include <glm/glm.hpp>
 
 #include "IModel.h"
 
-class PlayerModel : public IModel
+class CharacterModel : public IModel
 {
 public:
-	PlayerModel() = default;
-	PlayerModel(const glm::vec2& center, const glm::vec4& color, const float& radius, const float& speed)
+	CharacterModel() = default;
+	CharacterModel(const glm::vec2& center, const glm::vec4& color, const float& radius, const float& speed)
 		: _center(center), _color(color), _radius(radius), _speed(speed){}
-	PlayerModel(PlayerModel&& instance) noexcept
+	CharacterModel(CharacterModel&& instance) noexcept
 		: _center(instance._center), _color(instance._color), _radius(instance._radius), _speed(instance._speed) {}
-	PlayerModel(const PlayerModel& instance) noexcept
+	CharacterModel(const CharacterModel& instance) noexcept
 		: _center(instance._center), _color(instance._color), _radius(instance._radius), _speed(instance._speed) {}
 
-	virtual ~PlayerModel() = default;
+	virtual ~CharacterModel() = default;
 
-	PlayerModel& operator=(PlayerModel&& instance) noexcept
+	CharacterModel& operator=(CharacterModel&& instance) noexcept
 	{
 		if (this == &instance)
 		{
@@ -32,7 +33,7 @@ public:
 		return *this;
 	}
 
-	PlayerModel& operator=(const PlayerModel& instance) noexcept
+	CharacterModel& operator=(const CharacterModel& instance) noexcept
 	{
 		if (this == &instance)
 		{
