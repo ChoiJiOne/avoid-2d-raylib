@@ -2,6 +2,8 @@
 
 #include <memory>
 
+#include "GameMacro.h"
+
 class IModel;
 class IView;
 class IController;
@@ -9,6 +11,11 @@ class IController;
 class Actor
 {
 public:
+	Actor() = default;
+	virtual ~Actor();
+
+	DISALLOW_COPY_AND_ASSIGN(Actor);
+	
 	virtual void OnCreate() = 0;
 	virtual void OnShutdown() = 0;
 

@@ -4,6 +4,24 @@
 #include "IView.h"
 #include "GameAssert.h"
 
+Actor::~Actor()
+{
+	if (_controller)
+	{
+		_controller.reset();
+	}
+
+	if (_view)
+	{
+		_view.reset();
+	}
+
+	if (_model)
+	{
+		_model.reset();
+	}
+}
+
 void Actor::OnUpdate(float deltaSeconds)
 {
 	if (IsValidController())
