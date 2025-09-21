@@ -12,6 +12,10 @@ PlayerController::PlayerController()
     };
 }
 
+void PlayerController::PreUpdate(IModel& model, float deltaSeconds)
+{
+}
+
 void PlayerController::Update(IModel& model, float deltaSeconds)
 {
 	CharacterModel& character = static_cast<CharacterModel&>(model);
@@ -25,4 +29,8 @@ void PlayerController::Update(IModel& model, float deltaSeconds)
         }
     }
     character.ApplyMovement(moveDirection, deltaSeconds);
+}
+
+void PlayerController::PostUpdate(IModel& model, float deltaSeconds)
+{
 }

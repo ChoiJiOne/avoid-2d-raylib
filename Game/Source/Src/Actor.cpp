@@ -19,11 +19,27 @@ Actor::~Actor()
 	}
 }
 
+void Actor::OnPreUpdate(float deltaSeconds)
+{
+	if (IsValidController())
+	{
+		_controller->PreUpdate(*_model, deltaSeconds);
+	}
+}
+
 void Actor::OnUpdate(float deltaSeconds)
 {
 	if (IsValidController())
 	{
 		_controller->Update(*_model, deltaSeconds);
+	}
+}
+
+void Actor::OnPostUpdate(float deltaSeconds)
+{
+	if (IsValidController())
+	{
+		_controller->PostUpdate(*_model, deltaSeconds);
 	}
 }
 

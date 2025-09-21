@@ -20,7 +20,10 @@ public:
 public:
 	PlayerController();
 	virtual ~PlayerController() = default;
+
+	virtual void PreUpdate(IModel& model, float deltaSeconds) override;
 	virtual void Update(IModel& model, float deltaSeconds) override;
+	virtual void PostUpdate(IModel& model, float deltaSeconds) override;
 
 private:
 	std::map<EDirection, glm::vec2> _directionMap;

@@ -10,7 +10,17 @@ void MainPhase::OnUpdate(float deltaSeconds)
 {
     for (auto& actor : _actors)
     {
+        actor->OnPreUpdate(deltaSeconds);
+    }
+
+    for (auto& actor : _actors)
+    {
         actor->OnUpdate(deltaSeconds);
+    }
+
+    for (auto& actor : _actors)
+    {
+        actor->OnPostUpdate(deltaSeconds);
     }
 }
 

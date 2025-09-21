@@ -18,7 +18,9 @@ public:
 	virtual void OnCreate() = 0;
 	virtual void OnDestroy() = 0;
 
+	virtual void OnPreUpdate(float deltaSeconds);
 	virtual void OnUpdate(float deltaSeconds);
+	virtual void OnPostUpdate(float deltaSeconds);
 	virtual void OnRender() const;
 
 protected:
