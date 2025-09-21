@@ -4,8 +4,7 @@
 #include <glm/glm.hpp>
 
 #include "ActorManager.h"
-#include "Enemy.h"
-#include "Player.h"
+#include "MainPhase.h"
 #include "PhaseManager.h"
 
 int main(void)
@@ -18,34 +17,25 @@ int main(void)
     ActorManager::Get().Startup();
     PhaseManager::Get().Startup();
 
-    std::vector<Actor*> actors =
-    {
-        ActorManager::Get().Create<Player>(),
-        ActorManager::Get().Create<Enemy>(glm::vec2(  0.0f,   0.0f), glm::vec2(+1.0f, +1.0f)),
-        ActorManager::Get().Create<Enemy>(glm::vec2(800.0f,   0.0f), glm::vec2(-1.0f, +1.0f)),
-        ActorManager::Get().Create<Enemy>(glm::vec2(800.0f, 600.0f), glm::vec2(-1.0f, -1.0f)),
-        ActorManager::Get().Create<Enemy>(glm::vec2(  0.0f, 600.0f), glm::vec2(+1.0f, -1.0f))
-    };
+    MainPhase* mainPhase = PhaseManager::Get().Create<MainPhase>();
 
+    IPhase* currentPhase = mainPhase;
+    currentPhase->OnEnter();
     while (!WindowShouldClose())
     {
         float deltaSeconds = GetFrameTime();
 
-        for (auto& actor : actors)
+        currentPhase->OnUpdate(deltaSeconds);
+        currentPhase->OnRender();
+
+        if (currentPhase->ShouldTransition())
         {
-            actor->OnUpdate(deltaSeconds);
+            currentPhase->OnExit();
+            currentPhase = currentPhase->GetTransitionPhase();
+            currentPhase->OnEnter();
         }
-        
-        BeginDrawing();
-        {
-            ClearBackground(RAYWHITE);
-            for (const auto& actor : actors)
-            {
-                actor->OnRender();
-            }
-        }
-        EndDrawing();
     }
+    currentPhase->OnExit();
 
     ActorManager::Get().Shutdown();
     PhaseManager::Get().Shutdown();
