@@ -1,8 +1,12 @@
+#include <vector>
+
 #include <raylib.h>
 #include <glm/glm.hpp>
 
+#include "ActorManager.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "PhaseManager.h"
 
 int main(void)
 {
@@ -10,59 +14,41 @@ int main(void)
     const int screenHeight = 600;
     InitWindow(screenWidth, screenHeight, "Avoid");
     SetTargetFPS(60);
-    
-    std::unique_ptr<Player> player = std::make_unique<Player>();
-    player->OnCreate();
 
-    // TODO: 테스트용... 수정 필요.
-    std::unique_ptr<Enemy> enemy0 = std::make_unique<Enemy>(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f));
-    enemy0->OnCreate();
+    ActorManager::Get().Startup();
+    PhaseManager::Get().Startup();
 
-    std::unique_ptr<Enemy> enemy1 = std::make_unique<Enemy>(glm::vec2(800.0f, 0.0f), glm::vec2(-1.0f, 1.0f));
-    enemy1->OnCreate();
-
-    std::unique_ptr<Enemy> enemy2 = std::make_unique<Enemy>(glm::vec2(800.0f, 600.0f), glm::vec2(-1.0f, -1.0f));
-    enemy2->OnCreate();
-
-    std::unique_ptr<Enemy> enemy3 = std::make_unique<Enemy>(glm::vec2(0.0f, 600.0f), glm::vec2(1.0f, -1.0f));
-    enemy3->OnCreate();
+    std::vector<Actor*> actors =
+    {
+        ActorManager::Get().Create<Player>(),
+        ActorManager::Get().Create<Enemy>(glm::vec2(  0.0f,   0.0f), glm::vec2(+1.0f, +1.0f)),
+        ActorManager::Get().Create<Enemy>(glm::vec2(800.0f,   0.0f), glm::vec2(-1.0f, +1.0f)),
+        ActorManager::Get().Create<Enemy>(glm::vec2(800.0f, 600.0f), glm::vec2(-1.0f, -1.0f)),
+        ActorManager::Get().Create<Enemy>(glm::vec2(  0.0f, 600.0f), glm::vec2(+1.0f, -1.0f))
+    };
 
     while (!WindowShouldClose())
     {
         float deltaSeconds = GetFrameTime();
 
-        player->OnUpdate(deltaSeconds);
-        enemy0->OnUpdate(deltaSeconds);
-        enemy1->OnUpdate(deltaSeconds);
-        enemy2->OnUpdate(deltaSeconds);
-        enemy3->OnUpdate(deltaSeconds);
-
+        for (auto& actor : actors)
+        {
+            actor->OnUpdate(deltaSeconds);
+        }
+        
         BeginDrawing();
         {
             ClearBackground(RAYWHITE);
-            player->OnRender();
-            enemy0->OnRender();
-            enemy1->OnRender();
-            enemy2->OnRender();
-            enemy3->OnRender();
+            for (const auto& actor : actors)
+            {
+                actor->OnRender();
+            }
         }
         EndDrawing();
     }
 
-    enemy3->OnDestroy();
-    enemy3.reset();
-
-    enemy2->OnDestroy();
-    enemy2.reset();   
-    
-    enemy1->OnDestroy();
-    enemy1.reset();
-
-    enemy0->OnDestroy();
-    enemy0.reset();
-
-    player->OnDestroy();
-    player.reset();
+    ActorManager::Get().Shutdown();
+    PhaseManager::Get().Shutdown();
 
     CloseWindow();
     return 0;
