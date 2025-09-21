@@ -3,8 +3,8 @@
 #include <raylib.h>
 
 #if defined(DEBUG_MODE) || defined(RELWITHDEBINFO_MODE) || defined(RELEASE_MODE)
-#ifndef APP_CHECK
-#define APP_CHECK(EXP)\
+#ifndef GAME_CHECK
+#define GAME_CHECK(EXP)\
 {\
 	if (!(bool)(EXP))\
 	{\
@@ -13,8 +13,8 @@
 	}\
 }
 #endif
-#ifndef APP_ASSERT
-#define APP_ASSERT(EXP, ...)\
+#ifndef GAME_ASSERT
+#define GAME_ASSERT(EXP, ...)\
 {\
 	if (!(bool)(EXP))\
 	{\
@@ -25,10 +25,10 @@
 }
 #endif
 #else // defined(MINSIZEREL_MODE)
-#ifndef APP_CHECK
-#define APP_CHECK(EXP) ((void)(EXP))
+#ifndef GAME_CHECK
+#define GAME_CHECK(EXP) ((void)(EXP))
 #endif
-#ifndef APP_ASSERT
-#define APP_ASSERT(EXP, ...) ((void)(EXP))
+#ifndef GAME_ASSERT
+#define GAME_ASSERT(EXP, ...) ((void)(EXP))
 #endif
 #endif
