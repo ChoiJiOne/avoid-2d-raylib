@@ -24,5 +24,5 @@ void PlayerController::Update(IModel& model, float deltaSeconds)
             moveDirection += direction.second;
         }
     }
-    character.ApplyMovement(moveDirection);
+    character.ApplyMovement(moveDirection, deltaSeconds);
 }
