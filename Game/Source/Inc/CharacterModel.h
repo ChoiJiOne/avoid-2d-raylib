@@ -74,6 +74,7 @@ public:
 	void SetRadius(const float& radius) { _radius = radius; }
 	void SetSpeed(const float& speed) { _speed = speed; }
 
+	void Move(float deltaSeconds);
 	void ApplyMovement(const glm::vec2& direction, float deltaSeconds);
 
 private:
