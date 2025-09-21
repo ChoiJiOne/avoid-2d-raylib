@@ -10,8 +10,8 @@ Enemy::~Enemy()
 void Enemy::OnCreate()
 {
 	std::unique_ptr<CharacterModel> model = std::make_unique<CharacterModel>(
-		glm::vec2(0.0f, 0.0f),
-		glm::vec2(1.0f, 1.0f),
+		_startPosition,
+		_startDirection,
 		glm::vec4(1.0f, 0.5f, 0.5f, 1.0f),
 		20.0f,
 		100.0f
