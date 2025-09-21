@@ -3,5 +3,6 @@
 
 void EnemyController::Update(IModel& model, float deltaSeconds)
 {
-	CharacterModel& characteer = static_cast<CharacterModel&>(model);
+	CharacterModel& character = static_cast<CharacterModel&>(model);
+	character.Move(deltaSeconds);
 }
