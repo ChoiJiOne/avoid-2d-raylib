@@ -1,3 +1,4 @@
+#include "ActorManager.h"
 #include "CharacterModel.h"
 #include "CharacterView.h"
 #include "Player.h"
